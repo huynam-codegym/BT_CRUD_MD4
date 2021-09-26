@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Boos</title>
+</head>
+<body>
+<div style="font-size: 26px;background-color: aqua;text-align: center;" th:fragment="div-1(var1,var2,var3)">
+    <h1 th:text="${var1}"></h1>
+    <p><a th:href="@{${var2}}" th:text="${var3}"></a></p>
+</div>
+
+<footer th:fragment="footer">
+    &copy; 2021 Apple Boss list: Nam Luty - Huy Nam - Bình Japan
+</footer>
+</body>
+</html>

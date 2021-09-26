@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color:powderblue;">
+
+<div th:replace="layout::div-1('Edit employee','/employeePage','Back to employee list')"></div>
+
+<form th:object="${employee}" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td><input type="number" th:field="*{age}"/></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type="text" th:field="*{address}"/></td>
+        </tr>
+        <tr>
+            <td>Image:</td>
+            <td>
+                <img th:src="@{'/image/'+${employee.img}}" width="150px" height="200px" alt="">
+                <input type="file" th:field="*{imgMultipartFile}">
+            </td>
+        </tr>
+        <tr>
+            <td>Audio:</td>
+            <td>
+                <audio controls>
+                    <source th:src="@{'/audio/'+${employee.audio}}" type="audio/ogg">
+                    <source th:src="@{'/audio/'+${employee.audio}}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <input type="file" th:field="*{audioMultipartFile}">
+            </td>
+        </tr>
+        <tr>
+            <td>Boss:</td>
+            <td>
+                <select th:field="*{boss}">
+                    <option th:each="b : ${bosses}" th:value="${b.id}" th:text="${b.nickName}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update customer"></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

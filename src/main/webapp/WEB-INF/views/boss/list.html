@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Boss</title>
+</head>
+<body style ="background-color:powderblue;" >
+<div th:replace="layout::div-1('Boss List','/bossPage/create','Add new boss')"></div>
+<br>
+<div style="text-align: center">
+  <a style="font-size: 20px" th:href="@{/employeePage}">EmployeePage</a>
+</div>
+
+<div>
+  <div th:if="${message}">
+    <span style="color: #00ff51;font-size: 24px" th:text="${message}"></span>
+  </div>
+</div>
+
+<br>
+<table border="1px" width="60%">
+  <tr>
+    <th>STT</th>
+    <th>NickName</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>Detail</th>
+  </tr>
+  <tr th:each="bos,bosStat :${bosses}">
+    <td th:text="${bosStat.count}"></td>
+    <td th:text="${bos.getNickName()}"></td>
+    <td><a th:href="@{/bossPage/{id}/edit(id=${bos.getId()})}">EDIT</a></td>
+    <td><a th:href="@{/bossPage/{id}/delete(id=${bos.getId()})}">DELETE</a></td>
+    <td><a th:href="@{/bossPage/{id}/detail(id=${bos.getId()})}">DETAIL</a></td>
+  </tr>
+</table>
+<br>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

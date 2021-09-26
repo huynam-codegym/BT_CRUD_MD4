@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body style="background-color:powderblue;">
+<div th:replace="layout::div-1('Create Employee','/employeePage','Back to employee list')"></div>
+
+<fieldset style="width: 40%">
+    <legend>Information</legend>
+    <form th:object="${employee}" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" name="id" th:field="*{name}"/></td>
+                <td style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="text" th:field="*{age}"/></td>
+                <td style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" th:field="*{address}"/></td>
+                <td style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></td>
+            </tr>
+
+            <tr>
+                <td>Image:</td>
+                <td><input type="file" th:field="*{imgMultipartFile}"></td>
+            </tr>
+            <tr>
+                <td>Audio:</td>
+                <td><input type="file" th:field="*{audioMultipartFile}"></td>
+            </tr>
+            <tr>
+                <td>Boss:</td>
+                <td>
+                    <select th:field="*{boss}">
+                        <option th:each="b : ${bosses}" th:value="${b.id}" th:text="${b.nickName}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Create employee"></td>
+            </tr>
+        </table>
+    </form>
+</fieldset>
+
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

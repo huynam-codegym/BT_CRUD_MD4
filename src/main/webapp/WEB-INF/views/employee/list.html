@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee</title>
+</head>
+<body style="background-color:powderblue;">
+<div th:replace="layout::div-1('Employee List','/employeePage/create','Add new employee')"></div>
+
+<div style="size: 17px;color: #ff00b2">
+    <div th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+</div>
+<br>
+<div th:if="${back}" style="text-align: center">
+    <a style="font-size: 20px" th:href="@{/employeePage}">Back employee list</a>
+</div>
+<div style="text-align: center">
+    <a style="font-size: 20px" th:href="@{/bossPage}">Boss List</a>
+</div>
+<form>
+    Search by name:
+    <input name="search" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+<br/>
+</div>
+<table border="1" width="99%">
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Boss</th>
+        <th>Image</th>
+        <th>Audio</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Detail</th>
+    </tr>
+    <th:block th:each="em,emStat : ${employees}">
+        <tr>
+            <td th:text="${emStat.count}"></td>
+            <td th:text="${em.name}"></td>
+            <td th:text="${em.age}"></td>
+            <td th:text="${em.address}"></td>
+            <td th:if="${em.boss}" th:text="${em.boss.nickName}"></td>
+            <td><img th:src="@{'/image/'+${em.img}}" width="90px" height="120px" alt=""></td>
+            <td>
+                <audio controls>
+                    <source th:src="@{'/audio/'+${em.audio}}" type="audio/ogg">
+                    <source th:src="@{'/audio/'+${em.audio}}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </td>
+            <td th:unless="${em.boss}"></td>
+            <td><a th:href="@{/employeePage/{id}/edit(id=${em.getId()})}">Edit</a></td>
+            <td><a th:href="@{/employeePage/{id}/delete(id=${em.getId()})}">Delete</a></td>
+            <td><a th:href="@{/employeePage/{id}/detail(id=${em.getId()})}">Detail</a></td>
+        </tr>
+    </th:block>
+</table>
+<div style="text-align: center">
+    <a th:href="@{'/employeePage'(page=${employees.number - 1})}" th:if="${employees.hasPrevious()}">
+        <button>Previous</button>
+    </a>
+    <span th:text="${employees.number + 1}"></span>/<span th:text="${employees.totalPages}"></span>
+    <a th:href="@{'/employeePage'(page=${employees.number + 1})}" th:if="${employees.hasNext()}">
+        <button>Next</button>
+    </a>
+</div>
+
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

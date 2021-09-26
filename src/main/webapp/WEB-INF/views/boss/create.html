@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color:powderblue;">
+<div th:replace="layout::div-1('Create Boss','/bossPage','Back to boss list')"></div>
+
+<form th:object="${boss}" method="post">
+    <table>
+        <tr>
+            <td>NickName:</td>
+            <td><input type="text" th:field="*{nickName}"></td>
+            <td><button type="submit">Create Boss</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><td style="color: red" th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}"></td></td>
+        </tr>
+    </table>
+</form>
+<br><br>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

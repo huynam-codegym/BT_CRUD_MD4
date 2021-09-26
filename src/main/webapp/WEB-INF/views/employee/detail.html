@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color:powderblue;">
+<div th:replace="layout::div-1('Detail Employee','/employeePage','Back to employee list')"></div>
+
+<div>
+    <fieldset style="width: 50%">
+        <legend>INFO</legend>
+        <table>
+            <tr>
+                <td style="">Name:</td>
+                <td th:text="${employee.name}"></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td th:text="${employee.age}"></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td th:text="${employee.address}"></td>
+            </tr>
+
+            <tr>
+                <td>Boss:</td>
+                <td th:text="${employee.boss.nickName}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><img th:src="@{'/image/'+${employee.img}}" width="230px" height="230px"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <audio controls>
+                        <source th:src="@{'/audio/'+${employee.audio}}" type="audio/ogg">
+                        <source th:src="@{'/audio/'+${employee.audio}}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+
+</body>
+</html>

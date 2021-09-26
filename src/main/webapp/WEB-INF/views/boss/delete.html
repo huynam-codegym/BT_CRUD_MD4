@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+<div th:replace="layout::div-1('Delete Boss','/bossPage','Back to boss list')"></div>
+<table>
+    <form th:object="${boss}" method="post">
+        <tr>
+            <td th:text="*{nickName}"></td>
+        </tr>
+        <tr><td><button>Delete Boss</button></td></tr>
+    </form>
+</table>
+
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>
